@@ -19,8 +19,22 @@ task :doc => %w< doc:api doc:etc >
 
 namespace :doc do
 
-  desc "Generate API documentation"
-  task :api do
+  desc "Generate API documentation (in doc/api)"
+  task :api => FileList['lib/**/*.rb'] do |t|
+    rm_rf 'doc/api'
+    sh((<<-SH).gsub(/[\s\n]+/, ' ').strip)
+    hanna
+      --op doc/api
+      --promiscuous
+      --charset utf8
+      --fmt html
+      --inline-source
+      --line-numbers
+      --accessor option_accessor=RW
+      --main Rack::Accept
+      --title 'Rack::Accept API Documentation'
+      #{t.prerequisites.join(' ')}
+    SH
   end
 
   desc "Generate extra documentation"
@@ -32,7 +46,7 @@ end
 # PACKAGING ###################################################################
 
 if defined?(Gem)
-  $spec = eval("$SAFE=1\n#{File.read('rack-accept.gemspec')}")
+  $spec = eval("#{File.read('rack-accept.gemspec')}")
 
   def package(ext='')
     "dist/rack-accept-#{$spec.version}" + ext

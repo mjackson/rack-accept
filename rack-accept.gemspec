@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
+
   s.name = 'rack-accept'
-  s.version = '0.1'
+  s.version = '0.1.1'
   s.date = '2010-04-01'
 
   s.summary = 'HTTP Accept* tools for Rack'

@@ -1,8 +1,8 @@
 module Rack::Accept
 
   # Contains methods that are useful for working with Accept-style HTTP
-  # headers. The +MediaType+, +Charset+, +Encoding+, and +Language+ classes
-  # all mixin this module.
+  # headers. The MediaType, Charset, Encoding, and Language classes all mixin
+  # this module.
   module Header
 
     # Parses the value of an Accept-style request header into a hash of
@@ -77,11 +77,11 @@ module Rack::Accept
       end
 
       # Determines the most preferred value to use of those provided in
-      # +values+. See the documentation for +sort+ for more information on
+      # +values+. See the documentation for #sort for more information on
       # exactly how the sorting is done.
       #
-      # If +keep_unacceptables+ is false (the default) the return value of this
-      # method will be +false+ if no values are acceptable. Otherwise, the most
+      # If +keep_unacceptables+ is false (the default) and no values are
+      # acceptable the return value will be +nil+. Otherwise, the most
       # acceptable value will be returned.
       def best_of(values, keep_unacceptables=false)
         s = sort(values)

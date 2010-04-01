@@ -36,25 +36,25 @@ module Rack::Accept
       @language ||= Language.new(env['HTTP_ACCEPT_LANGUAGE'])
     end
 
-    # Returns true if the Accept request header indicates the given media type
-    # is acceptable, false otherwise.
+    # Returns true if the +Accept+ request header indicates the given media
+    # type is acceptable, false otherwise.
     def media_type?(value)
       media_type.accept?(value)
     end
 
-    # Returns true if the Accept-Charset request header indicates the given
+    # Returns true if the +Accept-Charset+ request header indicates the given
     # character set is acceptable, false otherwise.
     def charset?(value)
       charset.accept?(value)
     end
 
-    # Returns true if the Accept-Encoding request header indicates the given
+    # Returns true if the +Accept-Encoding+ request header indicates the given
     # encoding is acceptable, false otherwise.
     def encoding?(value)
       encoding.accept?(value)
     end
 
-    # Returns true if the Accept-Language request header indicates the given
+    # Returns true if the +Accept-Language+ request header indicates the given
     # language is acceptable, false otherwise.
     def language?(value)
       language.accept?(value)

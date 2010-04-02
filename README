@@ -1,9 +1,17 @@
 Rack::Accept
 ============
 
-rack-accept is a suite of tools for Rack/Ruby applications that eases the
+Rack::Accept is a suite of tools for Ruby/Rack applications that eases the
 complexity of reading and writing Accept, Accept-Charset, Accept-Encoding, and
 Accept-Language HTTP request headers.
+
+Some features of the library are:
+
+    * Strict adherence to RFC 2616, specifically section 14
+    * Support for HTTP Accept, Accept-Charset, Accept-Encoding, and
+      Accept-Language request headers
+    * May be used as Rack middleware or standalone
+    * Full test suite covering many edge cases
 
 Installation
 ------------
@@ -15,12 +23,12 @@ Using RubyGems:
 From a local copy:
 
     $ git clone git://github.com/mjijackson/rack-accept.git
-    $ rake package && sudo rake install
+    $ sudo rake install
 
 Usage
 -----
 
-rack-accept implements the Rack middleware interface and may be used with any
+Rack::Accept implements the Rack middleware interface and may be used with any
 Rack-based application. Simply insert the Rack::Accept module in your Rack
 middleware pipeline and access the Rack::Accept::Request object in the
 "rack-accept.request" environment key, as in the following example:

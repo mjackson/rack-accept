@@ -48,6 +48,8 @@ end
 if defined?(Gem)
   $spec = eval("#{File.read('.gemspec')}")
 
+  directory 'dist'
+
   def package(ext='')
     "dist/rack-accept-#{$spec.version}" + ext
   end
@@ -59,8 +61,6 @@ if defined?(Gem)
   task :install => package('.gem') do
     sh "gem install #{package('.gem')}"
   end
-
-  directory 'dist'
 
   file package('.gem') => %w< dist > + $spec.files do |f|
     sh "gem build .gemspec"

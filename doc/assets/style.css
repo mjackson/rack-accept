@@ -40,6 +40,12 @@ pre {
   background-color: #FDFDFD;
   padding-left: 6px;
 }
+::selection {
+  background: rgba(200,200,200,0.5);
+}
+::-moz-selection {
+  background: rgba(200,200,200,0.5);
+}
 #wrapper {
   position: relative;
   width: 600px;

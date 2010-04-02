@@ -3,7 +3,7 @@ require 'rake/testtask'
 
 task :default => :test
 
-CLEAN.include %w< doc/api >
+#CLEAN.include %w< doc/api >
 CLOBBER.include %w< dist >
 
 # TESTS #######################################################################
@@ -46,7 +46,7 @@ end
 # PACKAGING ###################################################################
 
 if defined?(Gem)
-  $spec = eval("#{File.read('rack-accept.gemspec')}")
+  $spec = eval("#{File.read('.gemspec')}")
 
   def package(ext='')
     "dist/rack-accept-#{$spec.version}" + ext
@@ -60,14 +60,14 @@ if defined?(Gem)
     sh "gem install #{package('.gem')}"
   end
 
-  directory 'dist/'
+  directory 'dist'
 
-  file package('.gem') => %w< dist/ rack-accept.gemspec > + $spec.files do |f|
-    sh "gem build rack-accept.gemspec"
+  file package('.gem') => %w< dist > + $spec.files do |f|
+    sh "gem build .gemspec"
     mv File.basename(f.name), f.name
   end
 
-  file package('.tar.gz') => %w< dist/ > + $spec.files do |f|
+  file package('.tar.gz') => %w< dist > + $spec.files do |f|
     sh "git archive --format=tar HEAD | gzip > #{f.name}"
   end
 

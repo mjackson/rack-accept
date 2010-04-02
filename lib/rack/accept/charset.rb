@@ -15,8 +15,7 @@ module Rack::Accept
       'Accept-Charset'
     end
 
-    # Determines the quality factor (qvalue) of the given +charset+,
-    # according to the specifications of the original header.
+    # Determines the quality factor (qvalue) of the given +charset+.
     def qvalue(charset)
       m = matches(charset)
       if m.empty?
@@ -26,8 +25,8 @@ module Rack::Accept
       end
     end
 
-    # Returns an array of character sets from the original header that match
-    # the given +charset+, ordered by precedence.
+    # Returns an array of character sets from this header that match the given
+    # +charset+, ordered by precedence.
     def matches(charset)
       values.select {|v|
         v == charset || v == '*'

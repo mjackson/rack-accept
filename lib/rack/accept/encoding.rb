@@ -15,8 +15,7 @@ module Rack::Accept
       'Accept-Encoding'
     end
 
-    # Determines the quality factor (qvalue) of the given +encoding+,
-    # according to the specifications of the original header.
+    # Determines the quality factor (qvalue) of the given +encoding+.
     def qvalue(encoding)
       m = matches(encoding)
       if m.empty?
@@ -26,8 +25,8 @@ module Rack::Accept
       end
     end
 
-    # Returns an array of encodings from the original header that match
-    # the given +encoding+, ordered by precedence.
+    # Returns an array of encodings from this header that match the given
+    # +encoding+, ordered by precedence.
     def matches(encoding)
       values.select {|v|
         v == encoding || v == '*'

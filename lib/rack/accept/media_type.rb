@@ -15,8 +15,7 @@ module Rack::Accept
       'Accept'
     end
 
-    # Determines the quality factor (qvalue) of the given +media_type+,
-    # according to the specifications of the original header.
+    # Determines the quality factor (qvalue) of the given +media_type+.
     def qvalue(media_type)
       return 1 if @qvalues.empty?
       m = matches(media_type)
@@ -24,8 +23,8 @@ module Rack::Accept
       @qvalues[m.first]
     end
 
-    # Returns an array of media types from the original header that match
-    # the given +media_type+, ordered by precedence.
+    # Returns an array of media types from this header that match the given
+    # +media_type+, ordered by precedence.
     def matches(media_type)
       type, subtype, params = parse_media_type(media_type)
       values.select {|v|

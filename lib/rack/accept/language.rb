@@ -15,8 +15,7 @@ module Rack::Accept
       'Accept-Language'
     end
 
-    # Determines the quality factor (qvalue) of the given +language+,
-    # according to the specifications of the original header.
+    # Determines the quality factor (qvalue) of the given +language+.
     def qvalue(language)
       return 1 if @qvalues.empty?
       m = matches(language)
@@ -24,8 +23,8 @@ module Rack::Accept
       @qvalues[m.first]
     end
 
-    # Returns an array of languages from the original header that match
-    # the given +language+, ordered by precedence.
+    # Returns an array of languages from this header that match the given
+    # +language+, ordered by precedence.
     def matches(language)
       values.select {|v|
         v == language || v == '*' || (language.match(/^(.+?)-/) && v == $1)

@@ -2,16 +2,16 @@ Rack::Accept
 ============
 
 Rack::Accept is a suite of tools for Ruby/Rack applications that eases the
-complexity of reading and writing Accept, Accept-Charset, Accept-Encoding, and
-Accept-Language HTTP request headers.
+complexity of building and interpreting the Accept* family of HTTP request
+headers.
 
 Some features of the library are:
 
-    * Strict adherence to RFC 2616, specifically section 14
-    * Support for HTTP Accept, Accept-Charset, Accept-Encoding, and
-      Accept-Language request headers
-    * May be used as Rack middleware or standalone
-    * Full test suite covering many edge cases
+  * Strict adherence to RFC 2616, specifically section 14
+  * Full support for the Accept, Accept-Charset, Accept-Encoding, and
+    Accept-Language HTTP request headers
+  * May be used as Rack middleware or standalone
+  * A comprehensive test suite that covers many edge cases
 
 Installation
 ------------
@@ -38,21 +38,51 @@ middleware pipeline and access the Rack::Accept::Request object in the
     use Rack::Accept
 
     app = lambda {|env|
-        accept = env['rack-accept.request']
-        response = Rack::Response.new
+      accept = env['rack-accept.request']
+      response = Rack::Response.new
 
-        if accept.media_type?('text/html')
-            response['Content-Type'] = 'text/html'
-            response.write "<p>Hello. You accept text/html!</p>"
-        else
-            response['Content-Type'] = 'text/plain'
-            response.write "Apparently you don't accept text/html. Too bad."
-        end
+      if accept.media_type?('text/html')
+        response['Content-Type'] = 'text/html'
+        response.write "<p>Hello. You accept text/html!</p>"
+      else
+        response['Content-Type'] = 'text/plain'
+        response.write "Apparently you don't accept text/html. Too bad."
+      end
 
-        response.finish
+      response.finish
     }
 
     run app
+
+Additionally, Rack::Accept may be used outside of a Rack context to provide
+any Ruby app the ability to construct and interpret Accept headers.
+
+    require 'rack/accept'
+
+    mtype = Rack::Accept::MediaType.new
+    mtype.qvalues = {
+      'text/html' => 1,
+      'text/*'    => 0.8,
+      '*/*'       => 0.5
+    }
+
+    mtype.to_s # => "Accept: text/html, text/*;q=0.8, */*;q=0.5"
+
+    cset = Rack::Accept::Charset.new('unicode-1-1, iso-8859-5;q=0.8')
+    cset.best_of(%w< iso-8859-5 unicode-1-1 >)  # => "unicode-1-1"
+    cset.accept?('iso-8859-1')                  # => true
+
+The very last line in this example may look like a mistake to someone not
+familiar with the intricacies of the spec, but it's actually correct. It
+just puts emphasis on the convenience of using this library.
+
+Four-letter Words
+-----------------
+
+  Spec: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+  Code: http://github.com/mjijackson/rack-accept
+  Docs: http://mjijackson.github.com/rack-accept
+  Bugs: http://github.com/mjijackson/rack-accept/issues
 
 License
 -------

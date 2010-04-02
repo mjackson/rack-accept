@@ -1,3 +1,12 @@
-## 0.1 / April 2010
+## 0.2 / April 2, 2010
+
+  * Moved all common header methods into Rack::Accept::Header module
+  * Many improvements to the documentation
+
+## 0.1.1 / April 1, 2010
+
+  * Whoops, forgot to require Rack. :]
+
+## 0.1 / April 1, 2010
 
   * Initial release

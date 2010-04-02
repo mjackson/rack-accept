@@ -21,7 +21,7 @@ Using [RubyGems][rubygems]:
 From a local copy:
 
     $ git clone git://github.com/mjijackson/rack-accept.git
-    $ sudo rake install
+    $ rake package && sudo rake install
 
 Usage
 -----

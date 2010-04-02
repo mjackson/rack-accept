@@ -3,7 +3,7 @@ require 'rake/testtask'
 
 task :default => :test
 
-#CLEAN.include %w< doc/api >
+CLEAN.include %w< doc/api >
 CLOBBER.include %w< dist >
 
 # TESTS #######################################################################
@@ -14,33 +14,25 @@ end
 
 # DOCS ########################################################################
 
-desc "Generate all documentation"
+desc "Generate documentation (in doc)"
 task :doc => %w< doc:api doc:etc >
 
-namespace :doc do
-
-  desc "Generate API documentation (in doc/api)"
-  task :api => FileList['lib/**/*.rb'] do |t|
-    rm_rf 'doc/api'
-    sh((<<-SH).gsub(/[\s\n]+/, ' ').strip)
-    hanna
-      --op doc/api
-      --promiscuous
-      --charset utf8
-      --fmt html
-      --inline-source
-      --line-numbers
-      --accessor option_accessor=RW
-      --main Rack::Accept
-      --title 'Rack::Accept API Documentation'
-      #{t.prerequisites.join(' ')}
-    SH
-  end
-
-  desc "Generate extra documentation"
-  task :etc do
-  end
-
+desc "Generate API documentation (in doc/api)"
+task :api => FileList['lib/**/*.rb'] do |t|
+  rm_rf 'doc/api'
+  sh((<<-SH).gsub(/[\s\n]+/, ' ').strip)
+  hanna
+    --op doc/api
+    --promiscuous
+    --charset utf8
+    --fmt html
+    --inline-source
+    --line-numbers
+    --accessor option_accessor=RW
+    --main Rack::Accept
+    --title 'Rack::Accept API Documentation'
+    #{t.prerequisites.join(' ')}
+  SH
 end
 
 # PACKAGING ###################################################################

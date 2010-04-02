@@ -3,7 +3,7 @@ require 'rack'
 module Rack::Accept
 
   # The current version of rack-accept.
-  VERSION = [0, 1, 1]
+  VERSION = [0, 2]
 
   # Returns the current version of rack-accept as a string.
   def self.version

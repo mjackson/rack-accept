@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'rack-accept'
-  s.version = '0.1.1'
-  s.date = '2010-04-01'
+  s.version = '0.2'
+  s.date = '2010-04-02'
 
   s.summary = 'HTTP Accept* for Ruby/Rack'
   s.description = 'HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack'
@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >
   s.extra_rdoc_files = %w< CHANGES README >
 
-  s.homepage = 'http://github.com/mjijackson/rack-accept'
+  s.homepage = 'http://mjijackson.github.com/rack-accept'
 end

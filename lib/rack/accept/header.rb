@@ -46,11 +46,34 @@ module Rack::Accept
     module_function :parse_media_type
 
     module PublicInstanceMethods
-      # Returns the quality factor (qvalue) of the given +value+. This method
-      # is the only method that must be overridden in child classes in order
-      # for them to be able to use all other methods of this module.
+      # A table of all values of this header to their respective quality
+      # factors (qvalues).
+      attr_accessor :qvalues
+
+      def initialize(header='')
+        @qvalues = parse(header)
+      end
+
+      # The name of this header. Should be overridden in classes that mixin
+      # this module.
+      def name
+        ''
+      end
+
+      # Returns the quality factor (qvalue) of the given +value+. Should be
+      # overridden in classes that mixin this module.
       def qvalue(value)
         1
+      end
+
+      # Returns the value of this header as a string.
+      def value
+        join(@qvalues)
+      end
+
+      # Returns an array of all values of this header, in no particular order.
+      def values
+        @qvalues.keys
       end
 
       # Determines if the given +value+ is acceptable (does not have a qvalue
@@ -87,6 +110,11 @@ module Rack::Accept
         s = sort(values)
         s.reject! {|q, v| q == 0 } unless keep_unacceptables
         s.first && s.first[1]
+      end
+
+      # Returns a string representation of this header.
+      def to_s
+        [name, value].join(': ')
       end
     end
 

@@ -10,26 +10,9 @@ module Rack::Accept
 
     include Header
 
-    attr_reader :qvalues
-
-    def initialize(header)
-      @qvalues = parse(header)
-    end
-
     # The name of this header.
     def name
       'Accept-Language'
-    end
-
-    # The value of this header, built from its internal representation.
-    def value
-      join(@qvalues)
-    end
-
-    # Returns an array of all language values that were specified in the
-    # original header, in no particular order.
-    def values
-      @qvalues.keys
     end
 
     # Determines the quality factor (qvalue) of the given +language+,
@@ -50,11 +33,6 @@ module Rack::Accept
         # "*" gets least precedence, any others are compared based on length.
         a == '*' ? -1 : (b == '*' ? 1 : a.length <=> b.length)
       }.reverse
-    end
-
-    # Returns a string representation of this header.
-    def to_s
-      [name, value].join(': ')
     end
 
   end

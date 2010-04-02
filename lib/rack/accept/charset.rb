@@ -10,26 +10,9 @@ module Rack::Accept
 
     include Header
 
-    attr_reader :qvalues
-
-    def initialize(header)
-      @qvalues = parse(header)
-    end
-
     # The name of this header.
     def name
       'Accept-Charset'
-    end
-
-    # The value of this header, built from its internal representation.
-    def value
-      join(@qvalues)
-    end
-
-    # Returns an array of all character set values that were specified in the
-    # original header, in no particular order.
-    def values
-      @qvalues.keys
     end
 
     # Determines the quality factor (qvalue) of the given +charset+,
@@ -52,11 +35,6 @@ module Rack::Accept
         # "*" gets least precedence, any others should be equal.
         a == '*' ? 1 : (b == '*' ? -1 : 0)
       }
-    end
-
-    # Returns a string representation of this header.
-    def to_s
-      [name, value].join(': ')
     end
 
   end

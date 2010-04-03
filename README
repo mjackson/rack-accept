@@ -60,12 +60,7 @@ any Ruby app the ability to construct and interpret Accept headers.
     require 'rack/accept'
 
     mtype = Rack::Accept::MediaType.new
-    mtype.qvalues = {
-      'text/html' => 1,
-      'text/*'    => 0.8,
-      '*/*'       => 0.5
-    }
-
+    mtype.qvalues = { 'text/html' => 1, 'text/*' => 0.8, '*/*' => 0.5 }
     mtype.to_s # => "Accept: text/html, text/*;q=0.8, */*;q=0.5"
 
     cset = Rack::Accept::Charset.new('unicode-1-1, iso-8859-5;q=0.8')

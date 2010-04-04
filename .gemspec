@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'rack-accept'
-  s.version = '0.2'
+  s.version = '0.3'
   s.date = '2010-04-02'
 
   s.summary = 'HTTP Accept* for Ruby/Rack'
@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.test_files = s.files.select {|path| path =~ /^test\/.*_test.rb/ }
 
   s.add_dependency('rack', '>= 0.4')
-  s.add_development_dependency 'rake'
+  s.add_development_dependency('rake')
 
   s.has_rdoc = true
   s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >

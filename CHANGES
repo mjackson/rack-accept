@@ -1,3 +1,8 @@
+## 0.3 / April 3, 2010
+
+  * Enhanced Rack middleware component to be able to automatically send a 406
+    response when the request is not acceptable
+
 ## 0.2 / April 2, 2010
 
   * Moved all common header methods into Rack::Accept::Header module

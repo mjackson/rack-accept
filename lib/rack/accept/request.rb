@@ -1,14 +1,11 @@
+require 'rack/request'
+
 module Rack::Accept
 
   # A container class for convenience methods when Rack::Accept is used on the
-  # request level (as Rack middleware, for example). This class manages a
+  # request level as Rack middleware. Instances of this class also manage a
   # lightweight cache of various header instances to speed up execution.
-  #
-  # Request currently does not extend Rack::Request because that class
-  # currently provides some limited functionality when it comes to determining
-  # the proper encoding to use with a request and I didn't want to confuse
-  # users.
-  class Request
+  class Request < Rack::Request
 
     attr_reader :env
 

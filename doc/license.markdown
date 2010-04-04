@@ -1,3 +1,6 @@
+License
+-------
+
 Copyright 2010 Michael J. I. Jackson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

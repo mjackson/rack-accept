@@ -41,6 +41,9 @@ pre {
   padding: 4px 0 4px 6px;
   line-height: 1.2;
 }
+strong {
+  font-weight: bold;
+}
 ::selection {
   background: rgba(200,200,200,0.5);
 }

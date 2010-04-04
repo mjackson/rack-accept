@@ -22,6 +22,9 @@ class CharsetTest < Test::Unit::TestCase
     c = C.new('iso-8859-1;q=0, *;q=0.5')
     assert_equal(0.5, c.qvalue('iso-8859-5'))
     assert_equal(0, c.qvalue('iso-8859-1'))
+
+    c = C.new('*;q=0')
+    assert_equal(0, c.qvalue('iso-8859-1'))
   end
 
   def test_matches

@@ -3,7 +3,7 @@ require 'rack'
 module Rack::Accept
 
   # The current version of rack-accept.
-  VERSION = [0, 2]
+  VERSION = [0, 3]
 
   # Returns the current version of rack-accept as a string.
   def self.version
@@ -22,5 +22,6 @@ module Rack::Accept
   autoload :Language,   'rack/accept/language'
   autoload :MediaType,  'rack/accept/media_type'
   autoload :Request,    'rack/accept/request'
+  autoload :Response,   'rack/accept/response'
 
 end

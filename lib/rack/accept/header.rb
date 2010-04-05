@@ -16,7 +16,7 @@ module Rack::Accept
         m = /^([^\s,]+?)(?:;\s*q=(\d+(?:\.\d+)?))?$/.match(part) # From WEBrick
 
         if m
-          qvalues[m[1]] = (m[2] || 1).to_f
+          qvalues[m[1]] = normalize_qvalue((m[2] || 1).to_f)
         else
           raise "Invalid header value: #{part.inspect}"
         end
@@ -44,6 +44,13 @@ module Rack::Accept
       m ? [m[1], m[2], m[3] || ''] : []
     end
     module_function :parse_media_type
+
+    # Converts 1.0 and 0.0 qvalues to 1 and 0 respectively. Used to maintain
+    # consistency across qvalue methods.
+    def normalize_qvalue(q)
+      (q == 1 || q == 0) && q.is_a?(Float) ? q.to_i : q
+    end
+    module_function :normalize_qvalue
 
     module PublicInstanceMethods
       # A table of all values of this header to their respective quality
@@ -100,7 +107,6 @@ module Rack::Accept
         values.each do |v|
           q = qvalue(v)
           if q != 0 || keep_unacceptables
-            q = 1 if q == 1.0 # Use the same key for 1 and 1.0
             qvalues[q] ||= []
             qvalues[q] << v
           end

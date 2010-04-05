@@ -21,7 +21,7 @@ module Rack::Accept
       if m.empty?
         encoding == 'identity' ? 1 : 0
       else
-        @qvalues[m.first]
+        normalize_qvalue(@qvalues[m.first])
       end
     end
 

@@ -21,7 +21,7 @@ module Rack::Accept
       if m.empty?
         charset == 'iso-8859-1' ? 1 : 0
       else
-        @qvalues[m.first]
+        normalize_qvalue(@qvalues[m.first])
       end
     end
 

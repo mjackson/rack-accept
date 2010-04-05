@@ -46,4 +46,12 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(['text', 'x-dvi', ''], H.parse_media_type('text/x-dvi'))
   end
 
+  def test_normalize_qvalue
+    assert_equal(1, H.normalize_qvalue(1.0))
+    assert_equal(0, H.normalize_qvalue(0.0))
+    assert_equal(1, H.normalize_qvalue(1))
+    assert_equal(0, H.normalize_qvalue(0))
+    assert_equal(0.5, H.normalize_qvalue(0.5))
+  end
+
 end

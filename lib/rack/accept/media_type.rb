@@ -20,7 +20,7 @@ module Rack::Accept
       return 1 if @qvalues.empty?
       m = matches(media_type)
       return 0 if m.empty?
-      @qvalues[m.first]
+      normalize_qvalue(@qvalues[m.first])
     end
 
     # Returns an array of media types from this header that match the given

@@ -47,6 +47,13 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(['text', 'x-dvi', ''], H.parse_media_type('text/x-dvi'))
   end
 
+  def test_parse_range_params
+    assert_equal({}, H.parse_range_params(''))
+    assert_equal({}, H.parse_range_params('a'))
+    assert_equal({'a' => 'a'}, H.parse_range_params('a=a'))
+    assert_equal({'a' => 'a', 'b' => 'b'}, H.parse_range_params('a=a;b=b'))
+  end
+
   def test_normalize_qvalue
     assert_equal(1, H.normalize_qvalue(1.0))
     assert_equal(0, H.normalize_qvalue(0.0))

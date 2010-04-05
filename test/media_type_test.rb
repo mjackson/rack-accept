@@ -24,6 +24,7 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal(%w{text/* */*}, m.matches('text/plain'))
     assert_equal(%w{text/html text/* */*}, m.matches('text/html'))
     assert_equal(%w{text/html;level=1 text/html text/* */*}, m.matches('text/html;level=1'))
+    assert_equal(%w{text/html;level=1 text/html text/* */*}, m.matches('text/html;level=1;answer=42'))
   end
 
   def test_best_of

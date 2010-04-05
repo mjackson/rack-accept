@@ -45,6 +45,17 @@ module Rack::Accept
     end
     module_function :parse_media_type
 
+    # Parses a string of media type range parameters into a hash of parameters
+    # to their respective values.
+    def parse_range_params(params)
+      params.split(';').inject({}) do |m, p|
+        k, v = p.split('=', 2)
+        m[k] = v if v
+        m
+      end
+    end
+    module_function :parse_range_params
+
     # Converts 1.0 and 0.0 qvalues to 1 and 0 respectively. Used to maintain
     # consistency across qvalue methods.
     def normalize_qvalue(q)

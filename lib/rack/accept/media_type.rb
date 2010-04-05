@@ -32,7 +32,7 @@ module Rack::Accept
           true
         else
           t, s, p = parse_media_type(v)
-          t == type && (s == subtype || s == '*') && (p == params || p == '')
+          t == type && (s == '*' || s == subtype) && (p == '' || params_match?(params, p))
         end
       }.sort_by {|v|
         # Most specific gets precedence.
@@ -40,5 +40,14 @@ module Rack::Accept
       }.reverse
     end
 
+  private
+
+    # Returns true if all parameters and values in +match+ are also present in
+    # +params+.
+    def params_match?(params, match)
+      return true if params == match
+      parsed = parse_range_params(params)
+      parsed == parsed.merge(parse_range_params(match))
+    end
   end
 end

@@ -36,6 +36,7 @@ class MediaTypeTest < Test::Unit::TestCase
 
     m = M.new('text/*')
     assert_equal('text/html', m.best_of(%w< text/html text/xml >))
+    assert_equal('text/xml', m.best_of(%w< text/xml text/html >))
   end
 
 end

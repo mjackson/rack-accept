@@ -87,29 +87,38 @@ module Rack::Accept
       # containing two objects: 1) the value's qvalue and 2) the original
       # value.
       #
-      # It is important to note that when performing this sort the order of
-      # the original values is preserved so long as the qvalue for each input
-      # value is the same. This expectation can be useful for example when
+      # It is important to note that this sort is a "stable sort". In other
+      # words, the order of the original values is preserved so long as the
+      # qvalue for each is the same. This expectation can be useful when
       # trying to determine which of a variety of options has the highest
       # qvalue. If the user prefers using one option over another (for any
       # number of reasons), he should put it first in +values+. He may then
       # use the first result with confidence that it is both most acceptable
-      # to the user and most convenient for him as well.
-      def sort(values)
-        values.map {|v| [ qvalue(v), v ] }.sort.reverse
+      # to the client and most convenient for him as well.
+      def sort_with_qvalues(values, keep_unacceptables=true)
+        qvalues = {}
+        values.each do |v|
+          q = qvalue(v)
+          if q != 0 || keep_unacceptables
+            q = 1 if q == 1.0 # Use the same key for 1 and 1.0
+            qvalues[q] ||= []
+            qvalues[q] << v
+          end
+        end
+        order = qvalues.keys.sort.reverse
+        order.inject([]) {|m, q| m.concat(qvalues[q].map {|v| [q, v] }) }
       end
 
-      # Determines the most preferred value to use of those provided in
-      # +values+. See the documentation for #sort for more information on
-      # exactly how the sorting is done.
-      #
-      # If +keep_unacceptables+ is false (the default) and no values are
-      # acceptable the return value will be +nil+. Otherwise, the most
-      # acceptable value will be returned.
+      # Sorts the given +values+ according to the qvalue of each while
+      # preserving the original order. See #sort_with_qvalues for more
+      # information on exactly how the sort is performed.
+      def sort(values, keep_unacceptables=false)
+        sort_with_qvalues(values, keep_unacceptables).map {|q, v| v }
+      end
+
+      # A shortcut for retrieving the first result of #sort.
       def best_of(values, keep_unacceptables=false)
-        s = sort(values)
-        s.reject! {|q, v| q == 0 } unless keep_unacceptables
-        s.first && s.first[1]
+        sort(values, keep_unacceptables).first
       end
 
       # Returns a string representation of this header.

@@ -26,4 +26,15 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal(%w{text/html;level=1 text/html text/* */*}, m.matches('text/html;level=1'))
   end
 
+  def test_best_of
+    m = M.new('text/*;q=0.5, text/html')
+    assert_equal('text/html', m.best_of(%w< text/plain text/html >))
+    assert_equal('text/plain', m.best_of(%w< text/plain image/png >))
+    assert_equal('text/plain', m.best_of(%w< text/plain text/javascript >))
+    assert_equal(nil, m.best_of(%w< image/png >))
+
+    m = M.new('text/*')
+    assert_equal('text/html', m.best_of(%w< text/html text/xml >))
+  end
+
 end

@@ -34,4 +34,12 @@ class CharsetTest < Test::Unit::TestCase
     assert_equal(%w{*}, c.matches('unicode-1-1'))
   end
 
+  def test_best_of
+    c = C.new('iso-8859-5, unicode-1-1;q=0.8')
+    assert_equal('iso-8859-5', c.best_of(%w< iso-8859-5 unicode-1-1 >))
+    assert_equal('iso-8859-5', c.best_of(%w< iso-8859-5 utf-8 >))
+    assert_equal('iso-8859-1', c.best_of(%w< iso-8859-1 utf-8 >))
+    assert_equal(nil, c.best_of(%w< utf-8 >))
+  end
+
 end

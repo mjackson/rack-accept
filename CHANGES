@@ -1,3 +1,9 @@
+## 0.4 / April 5, 2010
+
+  * Added support for media type queries with multiple range parameters
+  * Changed Rack::Accept::Header#sort method to return only single values
+    and moved previous functionality to Rack::Accept::Header#sort_with_qvalues
+
 ## 0.3 / April 3, 2010
 
   * Enhanced Rack middleware component to be able to automatically send a 406

@@ -56,27 +56,25 @@ middleware pipeline and access the Rack::Accept::Request object in the
 
 Rack::Accept can also construct automatic 406 responses if you set up the types
 of media, character sets, encoding, or languages your server is able to serve
-ahead of time.
+ahead of time. If you pass a configuration block to your `use` statement it will
+yield the Rack::Accept::Context object that is used for that invocation.
 
     require 'rack/accept'
 
-    use(Rack::Accept) do |accept|
+    use(Rack::Accept) do |context|
       # We only ever serve content in English or Japanese from this site, so if
       # the user doesn't accept either of these we will respond with a 406.
-      #
-      # Note: +accept+ is an instance of Rack::Accept::Context.
-      accept.languages = %w< en jp >
+      context.languages = %w< en jp >
     end
 
     app = ...
 
     run app
 
-Note: You should probably think about this very carefully before you use
-Rack::Accept in this way. Many user agents are careless about the types of
-Accept headers they send, and depend on apps not being too picky. Instead of
-automatically sending a 406, you should probably only send one when absolutely
-necessary.
+Note: You should think carefully before using Rack::Accept in this way.
+Many user agents are careless about the types of Accept headers they send, and
+depend on apps not being too picky. Instead of automatically sending a 406, you
+should probably only send one when absolutely necessary.
 
 Additionally, Rack::Accept may be used outside of a Rack context to provide
 any Ruby app the ability to construct and interpret Accept headers.

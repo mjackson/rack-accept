@@ -3,7 +3,7 @@ Usage
 
 Rack::Accept implements the Rack middleware interface and may be used with any
 Rack-based application. Simply insert the Rack::Accept module in your Rack
-middleware pipeline and access the [Rack::Accept::Request][req] object in the
+middleware pipeline and access the [Request][req] object in the
 "rack-accept.request" environment key, as in the following example:
 
     require 'rack/accept'
@@ -27,29 +27,28 @@ middleware pipeline and access the [Rack::Accept::Request][req] object in the
 
     run app
 
-Rack::Accept can also construct a [406][406] response automatically if you set
-up the types of media, character sets, encoding, or languages your server is
-able to serve ahead of time.
+Rack::Accept can also construct automatic [406][406] responses if you set up
+the types of media, character sets, encoding, or languages your server is able
+to serve ahead of time. If you pass a configuration block to your `use`
+statement it will yield the [Context][ctx] object that is used for that
+invocation.
 
     require 'rack/accept'
 
-    use(Rack::Accept) do |accept|
+    use(Rack::Accept) do |context|
       # We only ever serve content in English or Japanese from this site, so if
       # the user doesn't accept either of these we will respond with a 406.
-      #
-      # Note: +accept+ is an instance of Rack::Accept::Context.
-      accept.languages = %w< en jp >
+      context.languages = %w< en jp >
     end
 
     app = ...
 
     run app
 
-__Note:__ You should probably think about this very carefully before you use
-Rack::Accept in this way. Many user agents are careless about the types of
-Accept headers they send, and depend on apps not being too picky. Instead of
-automatically sending a 406, you should probably only send one when absolutely
-necessary.
+__Note:__ You should think carefully before using Rack::Accept in this way.
+Many user agents are careless about the types of Accept headers they send, and
+depend on apps not being too picky. Instead of automatically sending a 406, you
+should probably only send one when absolutely necessary.
 
 Additionally, Rack::Accept may be used outside of a Rack context to provide
 any Ruby app the ability to construct and interpret Accept headers.
@@ -71,4 +70,5 @@ don't have to worry about these kinds of details.
 
 [req]: api/classes/Rack/Accept/Request.html
 [406]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7
+[ctx]: api/classes/Rack/Accept/Context.html
 [sec14-3]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3

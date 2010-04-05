@@ -43,6 +43,7 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(['text', '*', ''], H.parse_media_type('text/*'))
     assert_equal(['text', 'html', ''], H.parse_media_type('text/html'))
     assert_equal(['text', 'html', 'level=1'], H.parse_media_type('text/html;level=1'))
+    assert_equal(['text', 'html', 'level=1;answer=42'], H.parse_media_type('text/html;level=1;answer=42'))
     assert_equal(['text', 'x-dvi', ''], H.parse_media_type('text/x-dvi'))
   end
 

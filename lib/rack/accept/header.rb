@@ -40,7 +40,7 @@ module Rack::Accept
     # subtype, and 3) the media type parameters. An empty array is returned if
     # no match can be made.
     def parse_media_type(media_type)
-      m = media_type.to_s.match(/^([a-z*]+)\/([a-z*-]+)(?:;([a-z0-9=]+))?$/)
+      m = media_type.to_s.match(/^([a-z*]+)\/([a-z*-]+)(?:;([a-z0-9=;]+))?$/)
       m ? [m[1], m[2], m[3] || ''] : []
     end
     module_function :parse_media_type

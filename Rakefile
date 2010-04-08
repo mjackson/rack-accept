@@ -49,16 +49,16 @@ end
 # PACKAGING & INSTALLATION ####################################################
 
 if defined?(Gem)
-  $spec = eval("#{File.read('.gemspec')}")
+  $spec = eval("#{File.read('rack-accept.gemspec')}")
 
   directory 'dist'
 
   def package(ext='')
-    "dist/rack-accept-#{$spec.version}" + ext
+    "dist/#{$spec.name}-#{$spec.version}" + ext
   end
 
   file package('.gem') => %w< dist > + $spec.files do |f|
-    sh "gem build .gemspec"
+    sh "gem build rack-accept.gemspec"
     mv File.basename(f.name), f.name
   end
 

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.files = Dir['lib/**/*.rb'] +
     Dir['test/*.rb'] +
     Dir['doc/**/*'] +
-    %w< CHANGES .gemspec Rakefile README >
+    %w< CHANGES rack-accept.gemspec Rakefile README >
 
   s.test_files = s.files.select {|path| path =~ /^test\/.*_test.rb/ }
 

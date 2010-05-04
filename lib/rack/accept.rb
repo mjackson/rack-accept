@@ -1,11 +1,12 @@
 require 'rack'
 
+# HTTP Accept* for Ruby/Rack.
+#
+# http://mjijackson.com/rack-accept
 module Rack::Accept
-
-  # The current version of rack-accept.
   VERSION = [0, 4, 1]
 
-  # Returns the current version of rack-accept as a string.
+  # Returns the current version of Rack::Accept as a string.
   def self.version
     VERSION.join('.')
   end
@@ -23,5 +24,4 @@ module Rack::Accept
   autoload :MediaType,  'rack/accept/media_type'
   autoload :Request,    'rack/accept/request'
   autoload :Response,   'rack/accept/response'
-
 end

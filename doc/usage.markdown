@@ -4,7 +4,7 @@ Usage
 Rack::Accept implements the Rack middleware interface and may be used with any
 Rack-based application. Simply insert the Rack::Accept module in your Rack
 middleware pipeline and access the [Request][req] object in the
-"rack-accept.request" environment key, as in the following example:
+"rack-accept.request" environment key, as in the following example.
 
     require 'rack/accept'
 

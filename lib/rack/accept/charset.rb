@@ -4,8 +4,7 @@ module Rack::Accept
   # specification, and provides several convenience methods for determining
   # acceptable character sets.
   #
-  # See http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html for more
-  # information.
+  # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
   class Charset
 
     include Header

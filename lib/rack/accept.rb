@@ -4,7 +4,7 @@ require 'rack'
 #
 # http://mjijackson.com/rack-accept
 module Rack::Accept
-  VERSION = [0, 4, 1]
+  VERSION = [0, 4, 2]
 
   # Returns the current version of Rack::Accept as a string.
   def self.version

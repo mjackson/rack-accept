@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'rack-accept'
-  s.version = '0.4.1'
-  s.date = '2010-04-05'
+  s.version = '0.4.2'
+  s.date = '2010-05-04'
 
   s.summary = 'HTTP Accept* for Ruby/Rack'
   s.description = 'HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack'

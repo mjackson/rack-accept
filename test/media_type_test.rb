@@ -39,4 +39,9 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal('text/xml', m.best_of(%w< text/xml text/html >))
   end
 
+  def test_extension
+    m = M.new('text/*;q=0.5;a=42')
+    assert_equal(0.5, m.qvalue('text/plain'))
+  end
+
 end

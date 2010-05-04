@@ -41,6 +41,16 @@ module Rack::Accept
 
   private
 
+    def initialize(header)
+      # Strip accept-extension for now. We may want to do something with this
+      # later if people actually start to use it.
+      header = header.to_s.split(/,\s*/).map {|part|
+        part.sub(/(;\s*q\s*=\s*[\d.]+).*$/, '\1')
+      }.join(', ')
+
+      super(header)
+    end
+
     # Returns true if all parameters and values in +match+ are also present in
     # +params+.
     def params_match?(params, match)

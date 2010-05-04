@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.summary = 'HTTP Accept* for Ruby/Rack'
   s.description = 'HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack'
 
-  s.author = 'Michael J. I. Jackson'
+  s.author = 'Michael Jackson'
   s.email = 'mjijackson@gmail.com'
 
   s.require_paths = %w< lib >
@@ -25,5 +25,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >
   s.extra_rdoc_files = %w< CHANGES README >
 
-  s.homepage = 'http://mjijackson.github.com/rack-accept'
+  s.homepage = 'http://mjijackson.com/rack-accept'
 end

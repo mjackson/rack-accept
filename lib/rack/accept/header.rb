@@ -12,8 +12,8 @@ module Rack::Accept
     def parse(header)
       qvalues = {}
 
-      header.to_s.split(/,\s*/).map do |part|
-        m = /^([^\s,]+?)(?:;\s*q=(\d+(?:\.\d+)?))?$/.match(part) # From WEBrick
+      header.to_s.split(/,\s*/).each do |part|
+        m = /^([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
 
         if m
           qvalues[m[1]] = normalize_qvalue((m[2] || 1).to_f)

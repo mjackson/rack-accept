@@ -3,9 +3,6 @@ require 'rake/testtask'
 
 task :default => :test
 
-CLEAN.include %w< doc/api doc/*.html doc/*.css >
-CLOBBER.include %w< dist >
-
 # TESTS #######################################################################
 
 Rake::TestTask.new(:test) do |t|
@@ -14,26 +11,12 @@ end
 
 # DOCS ########################################################################
 
-desc "Generate HTML documentation (in doc)"
-task :doc => FileList['doc/*.markdown'] do |t|
-  require 'erb' unless defined?(ERB)
-  require 'rdiscount' unless defined?(RDiscount)
-  layout = ERB.new(File.read('doc/assets/layout.html.erb'), 0, '%<>')
-  t.prerequisites.each do |path|
-    source = File.read(path)
-    content = Markdown.new(source, :smart).to_html
-    output = layout.result(binding)
-    File.open(path.sub('.markdown', '.html'), 'w') {|io| io.write(output) }
-  end
-  cp 'doc/assets/style.css', 'doc'
-end
-
-desc "Generate API documentation (in doc/api)"
+desc "Generate API documentation"
 task :api => FileList['lib/**/*.rb'] do |t|
-  rm_rf 'doc/api'
+  rm_rf 'api'
   sh((<<-SH).gsub(/[\s\n]+/, ' ').strip)
   hanna
-    --op doc/api
+    --op api
     --promiscuous
     --charset utf8
     --fmt html
@@ -45,6 +28,8 @@ task :api => FileList['lib/**/*.rb'] do |t|
     #{t.prerequisites.join(' ')}
   SH
 end
+
+CLEAN.include 'api'
 
 # PACKAGING & INSTALLATION ####################################################
 
@@ -79,3 +64,5 @@ if defined?(Gem)
     sh "gem push #{package('.gem')}"
   end
 end
+
+CLOBBER.include 'dist'

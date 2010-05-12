@@ -21,6 +21,7 @@ Using [RubyGems][rubygems]:
 From a local copy:
 
     $ git clone git://github.com/mjijackson/rack-accept.git
+    $ cd rack-accept
     $ rake package && sudo rake install
 
 [rfc]: http://www.w3.org/Protocols/rfc2616/rfc2616.html

@@ -23,6 +23,7 @@ Using RubyGems:
 From a local copy:
 
     $ git clone git://github.com/mjijackson/rack-accept.git
+    $ cd rack-accept
     $ rake package && sudo rake install
 
 Usage
@@ -99,8 +100,8 @@ Four-letter Words
 
   Spec: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
   Code: http://github.com/mjijackson/rack-accept
-  Docs: http://mjijackson.github.com/rack-accept
   Bugs: http://github.com/mjijackson/rack-accept/issues
+  Docs: http://mjijackson.com/rack-accept
 
 License
 -------

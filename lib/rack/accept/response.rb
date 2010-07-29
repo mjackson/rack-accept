@@ -1,10 +1,8 @@
 require 'rack/response'
 
 module Rack::Accept
-
   # The base class for responses issued by Rack::Accept.
   class Response < Rack::Response
-
     # Marks this response as being unacceptable and clears the response body.
     #
     # Note: The HTTP spec advises servers to respond with an "entity" that
@@ -16,6 +14,5 @@ module Rack::Accept
       self.body = []
       header['Content-Length'] = '0'
     end
-
   end
 end

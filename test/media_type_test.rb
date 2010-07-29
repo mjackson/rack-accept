@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class MediaTypeTest < Test::Unit::TestCase
-
   M = Rack::Accept::MediaType
 
   def test_qvalue
@@ -43,5 +42,4 @@ class MediaTypeTest < Test::Unit::TestCase
     m = M.new('text/*;q=0.5;a=42')
     assert_equal(0.5, m.qvalue('text/plain'))
   end
-
 end

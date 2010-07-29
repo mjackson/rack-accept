@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class CharsetTest < Test::Unit::TestCase
-
   C = Rack::Accept::Charset
 
   def test_qvalue
@@ -41,5 +40,4 @@ class CharsetTest < Test::Unit::TestCase
     assert_equal('iso-8859-1', c.best_of(%w< iso-8859-1 utf-8 >))
     assert_equal(nil, c.best_of(%w< utf-8 >))
   end
-
 end

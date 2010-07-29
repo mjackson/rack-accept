@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class EncodingTest < Test::Unit::TestCase
-
   E = Rack::Accept::Encoding
 
   def test_qvalue
@@ -27,5 +26,4 @@ class EncodingTest < Test::Unit::TestCase
     assert_equal('identity', e.best_of(%w< identity compress >))
     assert_equal(nil, e.best_of(%w< zip >))
   end
-
 end

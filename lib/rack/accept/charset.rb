@@ -1,12 +1,10 @@
 module Rack::Accept
-
   # Represents an HTTP Accept-Charset header according to the HTTP 1.1
   # specification, and provides several convenience methods for determining
   # acceptable character sets.
   #
   # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
   class Charset
-
     include Header
 
     # The name of this header.
@@ -34,6 +32,5 @@ module Rack::Accept
         a == '*' ? 1 : (b == '*' ? -1 : 0)
       }
     end
-
   end
 end

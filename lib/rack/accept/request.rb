@@ -1,12 +1,10 @@
 require 'rack/request'
 
 module Rack::Accept
-
   # A container class for convenience methods when Rack::Accept is used on the
   # request level as Rack middleware. Instances of this class also manage a
   # lightweight cache of various header instances to speed up execution.
   class Request < Rack::Request
-
     attr_reader :env
 
     def initialize(env)
@@ -88,6 +86,5 @@ module Rack::Accept
     def best_language(values)
       language.best_of(values)
     end
-
   end
 end

@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class HeaderTest < Test::Unit::TestCase
-
   H = Rack::Accept::Header
 
   def test_parse_and_join
@@ -61,5 +60,4 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(0, H.normalize_qvalue(0))
     assert_equal(0.5, H.normalize_qvalue(0.5))
   end
-
 end

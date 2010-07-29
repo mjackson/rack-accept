@@ -1,12 +1,10 @@
 module Rack::Accept
-
   # Represents an HTTP Accept header according to the HTTP 1.1 specification,
   # and provides several convenience methods for determining acceptable media
   # types.
   #
   # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
   class MediaType
-
     include Header
 
     # The name of this header.
@@ -58,6 +56,5 @@ module Rack::Accept
       parsed = parse_range_params(params)
       parsed == parsed.merge(parse_range_params(match))
     end
-
   end
 end

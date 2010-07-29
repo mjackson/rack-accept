@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class LanguageTest < Test::Unit::TestCase
-
   L = Rack::Accept::Language
 
   def test_qvalue
@@ -33,5 +32,4 @@ class LanguageTest < Test::Unit::TestCase
     assert_equal('en-us', l.best_of(%w< en-us en-au >))
     assert_equal(nil, l.best_of(%w< da >))
   end
-
 end

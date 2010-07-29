@@ -1,8 +1,6 @@
 module Rack::Accept
-
   # Implements the Rack middleware interface.
   class Context
-
     # This error is raised when the server is not able to provide an acceptable
     # response.
     class AcceptError < StandardError; end
@@ -65,6 +63,5 @@ module Rack::Accept
         raise AcceptError unless values.any? {|v| header.accept?(v) }
       end
     end
-
   end
 end

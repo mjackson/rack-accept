@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class ContextTest < Test::Unit::TestCase
-
   def media_types; Proc.new {|c| c.media_types = %w< text/html > } end
   def charsets;    Proc.new {|c| c.charsets = %w< iso-8859-5 > }   end
   def encodings;   Proc.new {|c| c.encodings = %w< gzip > }        end
@@ -55,5 +54,4 @@ class ContextTest < Test::Unit::TestCase
     request('HTTP_ACCEPT_LANGUAGE' => 'jp', &languages)
     assert_equal(406, status)
   end
-
 end

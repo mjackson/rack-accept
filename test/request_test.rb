@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/helper'
 
 class RequestTest < Test::Unit::TestCase
-
   R = Rack::Accept::Request
 
   def test_media_type
@@ -58,5 +57,4 @@ class RequestTest < Test::Unit::TestCase
     assert(request.language?('en-gb'))
     assert(!request.language?('da'))
   end
-
 end

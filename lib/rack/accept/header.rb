@@ -1,10 +1,8 @@
 module Rack::Accept
-
   # Contains methods that are useful for working with Accept-style HTTP
   # headers. The MediaType, Charset, Encoding, and Language classes all mixin
   # this module.
   module Header
-
     # Parses the value of an Accept-style request header into a hash of
     # acceptable values and their respective quality factors (qvalues). The
     # +join+ method may be used on the resulting hash to obtain a header
@@ -145,6 +143,5 @@ module Rack::Accept
     end
 
     include PublicInstanceMethods
-
   end
 end

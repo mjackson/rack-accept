@@ -1,3 +1,7 @@
+## 0.4.3 / July 29, 2010
+
+  * Added support for Ruby 1.9.2
+
 ## 0.4 / April 5, 2010
 
   * Added support for media type queries with multiple range parameters

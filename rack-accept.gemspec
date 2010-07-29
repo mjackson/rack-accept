@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name = 'rack-accept'
-  s.version = '0.4.2'
-  s.date = '2010-05-04'
+  s.version = '0.4.3'
+  s.date = '2010-07-29'
 
   s.summary = 'HTTP Accept* for Ruby/Rack'
   s.description = 'HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack'
@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
 
   s.require_paths = %w< lib >
 
-  s.files = Dir['lib/**/*.rb'] +
+  s.files = Dir['doc/**/*'] +
+    Dir['lib/**/*.rb'] +
     Dir['test/*.rb'] +
-    Dir['doc/**/*'] +
     %w< CHANGES rack-accept.gemspec Rakefile README >
 
   s.test_files = s.files.select {|path| path =~ /^test\/.*_test.rb/ }

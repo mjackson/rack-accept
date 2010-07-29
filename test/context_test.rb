@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/helper'
+require File.expand_path('../helper', __FILE__)
 
 class ContextTest < Test::Unit::TestCase
   def media_types; Proc.new {|c| c.media_types = %w< text/html > } end

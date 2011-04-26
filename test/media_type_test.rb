@@ -47,6 +47,9 @@ class MediaTypeTest < Test::Unit::TestCase
     m = M.new("application/vnd.ms-excel")
     assert_equal(nil, m.best_of(%w< application/vnd.ms-powerpoint >))
 
+    m = M.new("application/vnd.api-v1+json")
+    assert_equal(false, m.accept?("application/vnd.api-v2+json"))
+
     v1, v2 = "application/vnd.api-v1+json", "application/vnd.api-v2+json"
     m = M.new("#{v1},#{v2}")
     assert_equal(v1, m.best_of([v1, v2]))

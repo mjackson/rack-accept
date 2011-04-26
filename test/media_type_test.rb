@@ -42,4 +42,14 @@ class MediaTypeTest < Test::Unit::TestCase
     m = M.new('text/*;q=0.5;a=42')
     assert_equal(0.5, m.qvalue('text/plain'))
   end
+  
+  def test_vendored_types
+    m = M.new("application/vnd.ms-excel")
+    assert_equal(nil, m.best_of(%w< application/vnd.ms-powerpoint >))
+
+    v1, v2 = "application/vnd.api-v1+json", "application/vnd.api-v2+json"
+    m = M.new("#{v1},#{v2}")
+    assert_equal(v1, m.best_of([v1, v2]))
+    assert_equal(v2, m.best_of([v2, v1]))
+  end
 end

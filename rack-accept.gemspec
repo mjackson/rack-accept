@@ -1,7 +1,11 @@
+$LOAD_PATH.unshift(File.expand_path('../lib', __FILE__))
+
+require 'rack/accept/version'
+
 Gem::Specification.new do |s|
   s.name = 'rack-accept'
-  s.version = '0.4.3'
-  s.date = '2010-07-29'
+  s.version = Rack::Accept.version
+  s.date = Time.now.strftime('%Y-%m-%d')
 
   s.summary = 'HTTP Accept* for Ruby/Rack'
   s.description = 'HTTP Accept, Accept-Charset, Accept-Encoding, and Accept-Language for Ruby/Rack'

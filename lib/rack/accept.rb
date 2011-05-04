@@ -4,13 +4,6 @@ require 'rack'
 #
 # http://mjijackson.com/rack-accept
 module Rack::Accept
-  VERSION = [0, 4, 3]
-
-  # Returns the current version of Rack::Accept as a string.
-  def self.version
-    VERSION.join('.')
-  end
-
   # Enables Rack::Accept to be used as a Rack middleware.
   def self.new(app, &block)
     Context.new(app, &block)

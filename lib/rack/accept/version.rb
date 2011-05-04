@@ -1,6 +1,6 @@
 module Rack
   module Accept
-    VERSION = [0, 4, 3]
+    VERSION = [0, 4, 4]
 
     # Returns the current version of Rack::Accept as a string.
     def self.version

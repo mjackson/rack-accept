@@ -14,7 +14,7 @@ module Rack::Accept
         m = /^([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
 
         if m
-          qvalues[m[1]] = normalize_qvalue((m[2] || 1).to_f)
+          qvalues[m[1].downcase] = normalize_qvalue((m[2] || 1).to_f)
         else
           raise "Invalid header value: #{part.inspect}"
         end

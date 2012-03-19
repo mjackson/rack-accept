@@ -31,5 +31,11 @@ class LanguageTest < Test::Unit::TestCase
     assert_equal('en', l.best_of(%w< en da >))
     assert_equal('en-us', l.best_of(%w< en-us en-au >))
     assert_equal(nil, l.best_of(%w< da >))
+
+    l = L.new('en;q=0.5, en-GB, fr-CA')
+    assert_equal('en-gb', l.best_of(%w< en en-gb >))
+
+    l = L.new('en-gb;q=0.5, EN, fr-CA')
+    assert_equal('en', l.best_of(%w< en en-gb >))
   end
 end

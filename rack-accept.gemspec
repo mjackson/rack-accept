@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.files = Dir['doc/**/*'] +
     Dir['lib/**/*.rb'] +
     Dir['test/*.rb'] +
-    %w< CHANGES rack-accept.gemspec Rakefile README >
+    %w< CHANGES rack-accept.gemspec Rakefile README.md >
 
   s.test_files = s.files.select {|path| path =~ /^test\/.*_test.rb/ }
 
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = true
   s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >
-  s.extra_rdoc_files = %w< CHANGES README >
+  s.extra_rdoc_files = %w< CHANGES README.md >
 
   s.homepage = 'http://mjijackson.com/rack-accept'
 end

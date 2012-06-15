@@ -1,20 +1,29 @@
 # Rack::Accept
 
 **Rack::Accept** is a suite of tools for Ruby/Rack applications that eases the
-complexity of building and interpreting the Accept* family of HTTP request
-headers.
+complexity of building and interpreting the Accept* family of [HTTP request headers][rfc].
 
 Some features of the library are:
 
-  * Strict adherence to RFC 2616, specifically section 14
-  * Full support for the Accept, Accept-Charset, Accept-Encoding, and
-    Accept-Language HTTP request headers
-  * May be used as Rack middleware or standalone
-  * A comprehensive test suite that covers many edge cases
+  * Strict adherence to [RFC 2616][rfc], specifically [section 14][rfc-sec14]
+  * Full support for the [Accept][rfc-sec14-1], [Accept-Charset][rfc-sec14-2],
+    [Accept-Encoding][rfc-sec14-3], and [Accept-Language][rfc-sec14-4] HTTP
+    request headers
+  * May be used as [Rack][rack] middleware or standalone
+  * A comprehensive [test suite][test] that covers many edge cases
+
+[rfc]: http://www.w3.org/Protocols/rfc2616/rfc2616.html
+[rfc-sec14]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html
+[rfc-sec14-1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1
+[rfc-sec14-2]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.2
+[rfc-sec14-3]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3
+[rfc-sec14-4]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
+[rack]: http://rack.rubyforge.org/
+[test]: http://github.com/mjijackson/rack-accept/tree/master/test/
 
 ## Installation
 
-**Using RubyGems:**
+**Using [RubyGems](http://rubygems.org/):**
 
     $ sudo gem install rack-accept
 
@@ -54,10 +63,13 @@ end
 run app
 ```
 
-**Rack::Accept** can also construct automatic 406 responses if you set up the types
-of media, character sets, encoding, or languages your server is able to serve
-ahead of time. If you pass a configuration block to your `use` statement it will
-yield the `Rack::Accept::Context` object that is used for that invocation.
+**Rack::Accept** can also construct automatic [406][406] responses if you set up
+the types of media, character sets, encoding, or languages your server is able
+to serve ahead of time. If you pass a configuration block to your `use`
+statement it will yield the `Rack::Accept::Context` object that is used for that
+invocation.
+
+[406]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7
 
 ```ruby
 require 'rack/accept'
@@ -94,16 +106,20 @@ cset.accept?('iso-8859-1')                  # => true
 ```
 
 The very last line in this example may look like a mistake to someone not
-familiar with the intricacies of the spec, but it's actually correct. It
-just puts emphasis on the convenience of using this library so you don't
-have to worry about these kinds of details.
+familiar with the intricacies of [the spec][rfc-sec14-3], but it's actually
+correct. It just puts emphasis on the convenience of using this library so you
+don't have to worry about these kinds of details.
 
 ## Four-letter Words
 
-  - Spec: [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
-  - Code: [http://github.com/mjijackson/rack-accept](http://github.com/mjijackson/rack-accept)
-  - Bugs: [http://github.com/mjijackson/rack-accept/issues](http://github.com/mjijackson/rack-accept/issues)
-  - Docs: [http://mjijackson.com/rack-accept](http://mjijackson.com/rack-accept)
+  - Spec: [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html][rfc-sec14]
+  - Code: [http://github.com/mjijackson/rack-accept][code]
+  - Bugs: [http://github.com/mjijackson/rack-accept/issues][bugs]
+  - Docs: [http://mjijackson.github.com/rack-accept][docs]
+
+[code]: http://github.com/mjijackson/rack-accept
+[bugs]: http://github.com/mjijackson/rack-accept/issues
+[docs]: http://mjijackson.github.com/rack-accept
 
 ## License
 
@@ -119,10 +135,10 @@ furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+authors or copyright holders be liable for any claim, damages or other
+liability, whether in an action of contract, tort or otherwise, arising from,
+out of or in connection with the software or the use or other dealings in
+the software.

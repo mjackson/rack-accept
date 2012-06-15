@@ -29,5 +29,5 @@ Gem::Specification.new do |s|
   s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >
   s.extra_rdoc_files = %w< CHANGES README.md >
 
-  s.homepage = 'http://mjijackson.com/rack-accept'
+  s.homepage = 'http://mjijackson.github.com/rack-accept'
 end

@@ -6,6 +6,7 @@ module Rack::Accept
   # http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
   class Language
     include Header
+    attr_writer :first_level_match
 
     # The name of this header.
     def name
@@ -24,6 +25,7 @@ module Rack::Accept
     # +language+, ordered by precedence.
     def matches(language)
       values.select {|v|
+        v = v.match(/^(.+?)-/) ? $1 : v if @first_level_match
         v == language || v == '*' || (language.match(/^(.+?)-/) && v == $1)
       }.sort {|a, b|
         # "*" gets least precedence, any others are compared based on length.

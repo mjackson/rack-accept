@@ -1,4 +1,4 @@
-#Rack::Accept
+# Rack::Accept
 
 **Rack::Accept** is a suite of tools for Ruby/Rack applications that eases the
 complexity of building and interpreting the Accept* family of HTTP request
@@ -12,7 +12,7 @@ Some features of the library are:
   * May be used as Rack middleware or standalone
   * A comprehensive test suite that covers many edge cases
 
-##Installation
+## Installation
 
 **Using RubyGems:**
 
@@ -24,7 +24,7 @@ Some features of the library are:
     $ cd rack-accept
     $ rake package && sudo rake install
 
-##Usage
+## Usage
 
 **Rack::Accept** implements the Rack middleware interface and may be used with any
 Rack-based application. Simply insert the `Rack::Accept` module in your Rack
@@ -37,18 +37,18 @@ require 'rack/accept'
 use Rack::Accept
 
 app = lambda do |env|
-accept = env['rack-accept.request']
-response = Rack::Response.new
+  accept = env['rack-accept.request']
+  response = Rack::Response.new
 
-if accept.media_type?('text/html')
-  response['Content-Type'] = 'text/html'
-  response.write "<p>Hello. You accept text/html!</p>"
-else
-  response['Content-Type'] = 'text/plain'
-  response.write "Apparently you don't accept text/html. Too bad."
-end
+  if accept.media_type?('text/html')
+    response['Content-Type'] = 'text/html'
+    response.write "<p>Hello. You accept text/html!</p>"
+  else
+    response['Content-Type'] = 'text/plain'
+    response.write "Apparently you don't accept text/html. Too bad."
+  end
 
-response.finish
+  response.finish
 end
 
 run app
@@ -98,17 +98,16 @@ familiar with the intricacies of the spec, but it's actually correct. It
 just puts emphasis on the convenience of using this library so you don't
 have to worry about these kinds of details.
 
-##Four-letter Words
+## Four-letter Words
 
-  - [Spec: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
-  - [Code: http://github.com/mjijackson/rack-accept](http://github.com/mjijackson/rack-accept)
-  - [Bugs: http://github.com/mjijackson/rack-accept/issues](http://github.com/mjijackson/rack-accept/issues)
-  - [Docs: http://mjijackson.com/rack-accept](http://mjijackson.com/rack-accept)
+  - Spec: [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html)
+  - Code: [http://github.com/mjijackson/rack-accept](http://github.com/mjijackson/rack-accept)
+  - Bugs: [http://github.com/mjijackson/rack-accept/issues](http://github.com/mjijackson/rack-accept/issues)
+  - Docs: [http://mjijackson.com/rack-accept](http://mjijackson.com/rack-accept)
 
-##License
+## License
 
-
-*Copyright 2010 Michael Jackson*
+Copyright 2012 Michael Jackson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

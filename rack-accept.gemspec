@@ -15,8 +15,7 @@ Gem::Specification.new do |s|
 
   s.require_paths = %w< lib >
 
-  s.files = Dir['doc/**/*'] +
-    Dir['lib/**/*.rb'] +
+  s.files = Dir['lib/**/*.rb'] +
     Dir['test/*.rb'] +
     %w< CHANGES rack-accept.gemspec Rakefile README.md >
 
@@ -24,10 +23,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('rack', '>= 0.4')
   s.add_development_dependency('rake')
-
-  s.has_rdoc = true
-  s.rdoc_options = %w< --line-numbers --inline-source --title Rack::Accept --main Rack::Accept >
-  s.extra_rdoc_files = %w< CHANGES README.md >
 
   s.homepage = 'http://mjijackson.github.com/rack-accept'
 end

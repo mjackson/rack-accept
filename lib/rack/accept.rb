@@ -1,8 +1,5 @@
 require 'rack'
 
-# HTTP Accept* for Ruby/Rack.
-#
-# http://mjijackson.com/rack-accept
 module Rack::Accept
   # Enables Rack::Accept to be used as a Rack middleware.
   def self.new(app, &block)

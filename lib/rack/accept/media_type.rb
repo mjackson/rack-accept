@@ -7,6 +7,8 @@ module Rack::Accept
   class MediaType
     include Header
 
+    attr_accessor :extensions
+
     # The name of this header.
     def name
       'Accept'
@@ -40,13 +42,24 @@ module Rack::Accept
   private
 
     def initialize(header)
-      # Strip accept-extension for now. We may want to do something with this
-      # later if people actually start to use it.
-      header = header.to_s.split(/,\s*/).map {|part|
-        part.sub(/(;\s*q\s*=\s*[\d.]+).*$/, '\1')
-      }.join(', ')
+      @extensions = {}
+      header.to_s.split(',').each do |raw_media_type|
+        params = { 'q' => 1 }
+        parts = raw_media_type.split(';')
+        media_type = parts.shift.strip.downcase
+        parts.each do |part|
+          pair = part.split('=', 2)
+          pair[0].strip.downcase
+          pair[1].strip
+          params[pair[0]] = pair[0] == 'q' ? normalize_qvalue(pair[1]).to_f : pair[1]
+        end
+        @extensions[media_type] = params
+      end
 
-      super(header)
+      @qvalues = {}
+      @extensions.each do |k, v|
+        @qvalues[k] = v['q']
+      end
     end
 
     # Returns true if all parameters and values in +match+ are also present in

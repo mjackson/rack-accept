@@ -43,6 +43,8 @@ module Rack::Accept
 
     def initialize(header)
       @extensions = {}
+      @qvalues = {}
+
       header.to_s.split(',').each do |raw_media_type|
         params = { 'q' => 1 }
         parts = raw_media_type.split(';')
@@ -54,11 +56,7 @@ module Rack::Accept
           params[pair[0]] = pair[0] == 'q' ? normalize_qvalue(pair[1]).to_f : pair[1]
         end
         @extensions[media_type] = params
-      end
-
-      @qvalues = {}
-      @extensions.each do |k, v|
-        @qvalues[k] = v['q']
+        @qvalues[media_type] = params['q']
       end
     end
 

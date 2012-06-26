@@ -39,6 +39,13 @@ module Rack::Accept
       }.reverse
     end
 
+    # Returns a params hash for the media type that matches
+    def params(media_type)
+      return {} unless media_type
+      key = matches(media_type).first
+      @extensions[key] || {}
+    end
+
   private
 
     def initialize(header)

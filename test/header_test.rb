@@ -60,4 +60,10 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(0, H.normalize_qvalue(0))
     assert_equal(0.5, H.normalize_qvalue(0.5))
   end
+
+  def test_invalid_header
+    assert_raise Rack::Accept::Header::InvalidHeader do
+      h = H.parse(' / ')
+    end
+  end
 end

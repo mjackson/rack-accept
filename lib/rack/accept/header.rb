@@ -3,6 +3,8 @@ module Rack::Accept
   # headers. The MediaType, Charset, Encoding, and Language classes all mixin
   # this module.
   module Header
+    class InvalidHeader < StandardError; end
+
     # Parses the value of an Accept-style request header into a hash of
     # acceptable values and their respective quality factors (qvalues). The
     # +join+ method may be used on the resulting hash to obtain a header
@@ -16,7 +18,7 @@ module Rack::Accept
         if m
           qvalues[m[1].downcase] = normalize_qvalue((m[2] || 1).to_f)
         else
-          raise "Invalid header value: #{part.inspect}"
+          raise InvalidHeader, "Invalid header value: #{part.inspect}"
         end
       end
 

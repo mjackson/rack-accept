@@ -38,8 +38,8 @@ module Rack::Accept
     # subtype, and 3) the media type parameters. An empty array is returned if
     # no match can be made.
     def parse_media_type(media_type)
-      m = media_type.to_s.match(/^([a-z*]+)\/([a-z0-9*\-.+]+)(?:;([a-z0-9=;]+))?$/)
-      m ? [m[1], m[2], m[3] || ''] : []
+      m = media_type.to_s.match(/^\s*([a-zA-Z*]+)\s*\/\s*([a-zA-Z0-9*\-.+]+)\s*(?:;(.+))?$/)
+      m ? [m[1].downcase, m[2].downcase, m[3] || ''] : []
     end
     module_function :parse_media_type
 
@@ -48,7 +48,7 @@ module Rack::Accept
     def parse_range_params(params)
       params.split(';').inject({}) do |m, p|
         k, v = p.split('=', 2)
-        m[k] = v if v
+        m[k.strip] = v.strip if v
         m
       end
     end

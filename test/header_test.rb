@@ -47,10 +47,10 @@ class HeaderTest < Test::Unit::TestCase
   end
 
   def test_parse_range_params
-    assert_equal({}, H.parse_range_params(''))
-    assert_equal({}, H.parse_range_params('a'))
-    assert_equal({'a' => 'a'}, H.parse_range_params('a=a'))
-    assert_equal({'a' => 'a', 'b' => 'b'}, H.parse_range_params('a=a;b=b'))
+    assert_equal({'q' => '1'}, H.parse_range_params(''))
+    assert_equal({'q' => '1'}, H.parse_range_params('a'))
+    assert_equal({'q' => '1', 'a' => 'a'}, H.parse_range_params('a=a'))
+    assert_equal({'q' => '1', 'a' => 'a', 'b' => 'b'}, H.parse_range_params('a=a;b=b'))
   end
 
   def test_normalize_qvalue

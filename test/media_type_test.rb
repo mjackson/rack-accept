@@ -16,6 +16,14 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal(1, m.qvalue('text/html'))
   end
 
+  def test_invalid_media_type
+    assert_raise Rack::Accept::Header::InvalidHeader do
+      m = M.new('')
+      m = M.new('text')
+      m = M.new('text;q=1')
+    end
+  end
+
   def test_matches
     m = M.new('text/*, text/html, text/html;level=1, */*')
     assert_equal(%w{*/*}, m.matches(''))
@@ -46,7 +54,7 @@ class MediaTypeTest < Test::Unit::TestCase
     m = M.new('text/*;q=0.5;a=42')
     assert_equal(0.5, m.qvalue('text/plain'))
   end
-  
+
   def test_vendored_types
     m = M.new("application/vnd.ms-excel")
     assert_equal(nil, m.best_of(%w< application/vnd.ms-powerpoint >))

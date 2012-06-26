@@ -45,10 +45,11 @@ module Rack::Accept
       @extensions = {}
       @qvalues = {}
 
-      header.to_s.split(',').each do |raw_media_type|
-        type, subtype, raw_params = parse_media_type(raw_media_type)
+      header.to_s.split(',').each do |part|
+        type, subtype, raw_params = parse_media_type(part)
+        raise InvalidHeader, "Invalid header value: #{part.inspect}" if !type || !subtype
         media_type = "#{type}/#{subtype}"
-        params = ({'q' => '1'}).merge(parse_range_params(raw_params))
+        params = parse_range_params(raw_params)
         @extensions[media_type] = params
         @qvalues[media_type] = normalize_qvalue(params['q']).to_f
       end

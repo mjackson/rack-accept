@@ -48,7 +48,7 @@ module Rack::Accept
     # Parses a string of media type range parameters into a hash of parameters
     # to their respective values.
     def parse_range_params(params)
-      params.split(';').inject({}) do |m, p|
+      params.split(';').inject({'q' => '1'}) do |m, p|
         k, v = p.split('=', 2)
         m[k.strip] = v.strip if v
         m

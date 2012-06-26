@@ -10,8 +10,8 @@ module Rack::Accept
     def parse(header)
       qvalues = {}
 
-      header.to_s.split(/,\s*/).each do |part|
-        m = /^([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
+      header.to_s.split(',').each do |part|
+        m = /^\s*([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
 
         if m
           qvalues[m[1].downcase] = normalize_qvalue((m[2] || 1).to_f)

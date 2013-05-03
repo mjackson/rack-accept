@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mjijackson/rack-accept.png)](https://travis-ci.org/mjijackson/rack-accept)
+
 **Rack::Accept** is a suite of tools for Ruby/Rack applications that eases the
 complexity of building and interpreting the Accept* family of [HTTP request headers][rfc].
 

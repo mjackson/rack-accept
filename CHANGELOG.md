@@ -1,3 +1,7 @@
+## 0.4.x
+
+  * Added travis-ci support
+
 ## 0.4.3 / July 29, 2010
 
   * Added support for Ruby 1.9.2

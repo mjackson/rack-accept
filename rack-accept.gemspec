@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('rake')
 
   s.homepage = 'http://mjijackson.github.com/rack-accept'
+  s.license = 'MIT'
 end

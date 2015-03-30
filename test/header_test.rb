@@ -44,7 +44,7 @@ class HeaderTest < Test::Unit::TestCase
     assert_equal(['text', 'html', 'level=1'], H.parse_media_type('text/html;level=1'))
     assert_equal(['text', 'html', 'level=1;answer=42'], H.parse_media_type('text/html;level=1;answer=42'))
     assert_equal(['text', 'x-dvi', ''], H.parse_media_type('text/x-dvi'))
-    assert_equal(['application', 'vnd.usertesting.available_sessions-v1+json', ''], H.parse_media_type('application/vnd.usertesting.available_sessions-v1+json'))
+    assert_equal(['application', 'vnd.vendorname.available_foos-v1+json', ''], H.parse_media_type('application/vnd.vendorname.available_foos-v1+json'))
   end
 
   def test_parse_range_params

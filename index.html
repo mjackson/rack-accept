@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Rack::Accept by mjijackson</title>
+    <meta name="description" content="Rack::Accept : HTTP Accept* for Ruby/Rack">
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Rack::Accept</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Rack::Accept</h1>
-        <p>HTTP Accept* for Ruby/Rack</p>
 
-        <p class="view"><a href="https://github.com/mjijackson/rack-accept">View the Project on GitHub <small>mjijackson/rack-accept</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mjackson/rack-accept">View on GitHub</a>
 
+          <h1 id="project_title">Rack::Accept</h1>
+          <h2 id="project_tagline">HTTP Accept* for Ruby/Rack</h2>
 
-        <ul>
-          <li><a href="https://github.com/mjijackson/rack-accept/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/mjijackson/rack-accept/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/mjijackson/rack-accept">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mjackson/rack-accept/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mjackson/rack-accept/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <p><strong>Rack::Accept</strong> is a suite of tools for Ruby/Rack applications that eases the
 complexity of building and interpreting the Accept* family of <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP request headers</a>.</p>
 
@@ -41,7 +44,10 @@ complexity of building and interpreting the Accept* family of <a href="http://ww
 request headers</li>
 <li>May be used as <a href="http://rack.rubyforge.org/">Rack</a> middleware or standalone</li>
 <li>A comprehensive <a href="http://github.com/mjijackson/rack-accept/tree/master/test/">test suite</a> that covers many edge cases</li>
-</ul><h2>Installation</h2>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p><strong>Using <a href="http://rubygems.org/">RubyGems</a>:</strong></p>
 
@@ -55,37 +61,34 @@ $ cd rack-accept
 $ rake package &amp;&amp; sudo rake install
 </code></pre>
 
-<h2>Usage</h2>
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
 <p><strong>Rack::Accept</strong> implements the Rack middleware interface and may be used with any
 Rack-based application. Simply insert the <code>Rack::Accept</code> module in your Rack
 middleware pipeline and access the <code>Rack::Accept::Request</code> object in the
 <code>rack-accept.request</code> environment key, as in the following example.</p>
 
-<div class="highlight">
-<pre><span class="nb">require</span> <span class="s1">'rack/accept'</span>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>rack/accept<span class="pl-pds">'</span></span>
 
-<span class="n">use</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Accept</span>
+use <span class="pl-c1">Rack</span>::<span class="pl-c1">Accept</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
-  <span class="n">accept</span> <span class="o">=</span> <span class="n">env</span><span class="o">[</span><span class="s1">'rack-accept.request'</span><span class="o">]</span>
-  <span class="n">response</span> <span class="o">=</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Response</span><span class="o">.</span><span class="n">new</span>
+app <span class="pl-k">=</span> lambda <span class="pl-k">do </span>|<span class="pl-smi">env</span>|
+  accept <span class="pl-k">=</span> env[<span class="pl-s"><span class="pl-pds">'</span>rack-accept.request<span class="pl-pds">'</span></span>]
+  response <span class="pl-k">=</span> <span class="pl-c1">Rack</span>::<span class="pl-c1">Response</span>.<span class="pl-k">new</span>
 
-  <span class="k">if</span> <span class="n">accept</span><span class="o">.</span><span class="n">media_type?</span><span class="p">(</span><span class="s1">'text/html'</span><span class="p">)</span>
-    <span class="n">response</span><span class="o">[</span><span class="s1">'Content-Type'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'text/html'</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">write</span> <span class="s2">"&lt;p&gt;Hello. You accept text/html!&lt;/p&gt;"</span>
-  <span class="k">else</span>
-    <span class="n">response</span><span class="o">[</span><span class="s1">'Content-Type'</span><span class="o">]</span> <span class="o">=</span> <span class="s1">'text/plain'</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">write</span> <span class="s2">"Apparently you don't accept text/html. Too bad."</span>
-  <span class="k">end</span>
+  <span class="pl-k">if</span> accept.media_type?(<span class="pl-s"><span class="pl-pds">'</span>text/html<span class="pl-pds">'</span></span>)
+    response[<span class="pl-s"><span class="pl-pds">'</span>Content-Type<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>text/html<span class="pl-pds">'</span></span>
+    response.write <span class="pl-s"><span class="pl-pds">"</span>&lt;p&gt;Hello. You accept text/html!&lt;/p&gt;<span class="pl-pds">"</span></span>
+  <span class="pl-k">else</span>
+    response[<span class="pl-s"><span class="pl-pds">'</span>Content-Type<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>text/plain<span class="pl-pds">'</span></span>
+    response.write <span class="pl-s"><span class="pl-pds">"</span>Apparently you don't accept text/html. Too bad.<span class="pl-pds">"</span></span>
+  <span class="pl-k">end</span>
 
-  <span class="n">response</span><span class="o">.</span><span class="n">finish</span>
-<span class="k">end</span>
+  response.finish
+<span class="pl-k">end</span>
 
-<span class="n">run</span> <span class="n">app</span>
-</pre>
-</div>
-
+run app</pre></div>
 
 <p><strong>Rack::Accept</strong> can also construct automatic <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">406</a> responses if you set up
 the types of media, character sets, encoding, or languages your server is able
@@ -93,21 +96,17 @@ to serve ahead of time. If you pass a configuration block to your <code>use</cod
 statement it will yield the <code>Rack::Accept::Context</code> object that is used for that
 invocation.</p>
 
-<div class="highlight">
-<pre><span class="nb">require</span> <span class="s1">'rack/accept'</span>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>rack/accept<span class="pl-pds">'</span></span>
 
-<span class="n">use</span><span class="p">(</span><span class="no">Rack</span><span class="o">::</span><span class="no">Accept</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">context</span><span class="o">|</span>
-  <span class="c1"># We only ever serve content in English or Japanese from this site, so if</span>
-  <span class="c1"># the user doesn't accept either of these we will respond with a 406.</span>
-  <span class="n">context</span><span class="o">.</span><span class="n">languages</span> <span class="o">=</span> <span class="sx">%w&lt; en jp &gt;</span>
-<span class="k">end</span>
+use(<span class="pl-c1">Rack</span>::<span class="pl-c1">Accept</span>) <span class="pl-k">do </span>|<span class="pl-smi">context</span>|
+  <span class="pl-c"># We only ever serve content in English or Japanese from this site, so if</span>
+  <span class="pl-c"># the user doesn't accept either of these we will respond with a 406.</span>
+  context.languages <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">%w&lt;</span> en jp <span class="pl-pds">&gt;</span></span>
+<span class="pl-k">end</span>
 
-<span class="n">app</span> <span class="o">=</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+app <span class="pl-k">=</span> ...
 
-<span class="n">run</span> <span class="n">app</span>
-</pre>
-</div>
-
+run app</pre></div>
 
 <p><strong>Note:</strong> <em>You should think carefully before using Rack::Accept in this way.
 Many user agents are careless about the types of Accept headers they send, and
@@ -117,26 +116,23 @@ should probably only send one when absolutely necessary.</em></p>
 <p>Additionally, <strong>Rack::Accept</strong> may be used outside of a Rack context to provide
 any Ruby app the ability to construct and interpret Accept headers.</p>
 
-<div class="highlight">
-<pre><span class="nb">require</span> <span class="s1">'rack/accept'</span>
+<div class="highlight highlight-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>rack/accept<span class="pl-pds">'</span></span>
 
-<span class="n">mtype</span> <span class="o">=</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Accept</span><span class="o">::</span><span class="no">MediaType</span><span class="o">.</span><span class="n">new</span>
-<span class="n">mtype</span><span class="o">.</span><span class="n">qvalues</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'text/html'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'text/*'</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="s1">'*/*'</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span> <span class="p">}</span>
-<span class="n">mtype</span><span class="o">.</span><span class="n">to_s</span> <span class="c1"># =&gt; "Accept: text/html, text/*;q=0.8, */*;q=0.5"</span>
+mtype <span class="pl-k">=</span> <span class="pl-c1">Rack</span>::<span class="pl-c1">Accept</span>::<span class="pl-c1">MediaType</span>.<span class="pl-k">new</span>
+mtype.qvalues <span class="pl-k">=</span> { <span class="pl-s"><span class="pl-pds">'</span>text/html<span class="pl-pds">'</span></span> =&gt; <span class="pl-c1">1</span>, <span class="pl-s"><span class="pl-pds">'</span>text/*<span class="pl-pds">'</span></span> =&gt; <span class="pl-c1">0.8</span>, <span class="pl-s"><span class="pl-pds">'</span>*/*<span class="pl-pds">'</span></span> =&gt; <span class="pl-c1">0.5</span> }
+mtype.to_s <span class="pl-c"># =&gt; "Accept: text/html, text/*;q=0.8, */*;q=0.5"</span>
 
-<span class="n">cset</span> <span class="o">=</span> <span class="no">Rack</span><span class="o">::</span><span class="no">Accept</span><span class="o">::</span><span class="no">Charset</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">'unicode-1-1, iso-8859-5;q=0.8'</span><span class="p">)</span>
-<span class="n">cset</span><span class="o">.</span><span class="n">best_of</span><span class="p">(</span><span class="sx">%w&lt; iso-8859-5 unicode-1-1 &gt;</span><span class="p">)</span>  <span class="c1"># =&gt; "unicode-1-1"</span>
-<span class="n">cset</span><span class="o">.</span><span class="n">accept?</span><span class="p">(</span><span class="s1">'iso-8859-1'</span><span class="p">)</span>                  <span class="c1"># =&gt; true</span>
-</pre>
-</div>
-
+cset <span class="pl-k">=</span> <span class="pl-c1">Rack</span>::<span class="pl-c1">Accept</span>::<span class="pl-c1">Charset</span>.<span class="pl-k">new</span>(<span class="pl-s"><span class="pl-pds">'</span>unicode-1-1, iso-8859-5;q=0.8<span class="pl-pds">'</span></span>)
+cset.best_of(<span class="pl-s"><span class="pl-pds">%w&lt;</span> iso-8859-5 unicode-1-1 <span class="pl-pds">&gt;</span></span>)  <span class="pl-c"># =&gt; "unicode-1-1"</span>
+cset.accept?(<span class="pl-s"><span class="pl-pds">'</span>iso-8859-1<span class="pl-pds">'</span></span>)                  <span class="pl-c"># =&gt; true</span></pre></div>
 
 <p>The very last line in this example may look like a mistake to someone not
 familiar with the intricacies of <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.3">the spec</a>, but it's actually
 correct. It just puts emphasis on the convenience of using this library so you
 don't have to worry about these kinds of details.</p>
 
-<h2>Four-letter Words</h2>
+<h2>
+<a id="four-letter-words" class="anchor" href="#four-letter-words" aria-hidden="true"><span class="octicon octicon-link"></span></a>Four-letter Words</h2>
 
 <ul>
 <li>Spec: <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</a>
@@ -147,7 +143,10 @@ don't have to worry about these kinds of details.</p>
 </li>
 <li>Docs: <a href="http://mjijackson.github.com/rack-accept">http://mjijackson.github.com/rack-accept</a>
 </li>
-</ul><h2>License</h2>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>Copyright 2012 Michael Jackson</p>
 
@@ -169,12 +168,17 @@ liability, whether in an action of contract, tort or otherwise, arising from,
 out of or in connection with the software or the use or other dealings in
 the software.</p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/mjijackson">mjijackson</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rack::Accept maintained by <a href="https://github.com/mjackson">mjackson</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>

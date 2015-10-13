@@ -3,6 +3,8 @@ module Rack::Accept
   # headers. The MediaType, Charset, Encoding, and Language classes all mixin
   # this module.
   module Header
+    class InvalidHeader < StandardError; end
+
     # Parses the value of an Accept-style request header into a hash of
     # acceptable values and their respective quality factors (qvalues). The
     # +join+ method may be used on the resulting hash to obtain a header
@@ -10,13 +12,13 @@ module Rack::Accept
     def parse(header)
       qvalues = {}
 
-      header.to_s.split(/,\s*/).each do |part|
-        m = /^([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
+      header.to_s.split(',').each do |part|
+        m = /^\s*([^\s,]+?)(?:\s*;\s*q\s*=\s*(\d+(?:\.\d+)?))?$/.match(part)
 
         if m
           qvalues[m[1].downcase] = normalize_qvalue((m[2] || 1).to_f)
         else
-          raise "Invalid header value: #{part.inspect}"
+          raise InvalidHeader, "Invalid header value: #{part.inspect}"
         end
       end
 
@@ -38,17 +40,17 @@ module Rack::Accept
     # subtype, and 3) the media type parameters. An empty array is returned if
     # no match can be made.
     def parse_media_type(media_type)
-      m = media_type.to_s.match(/^([a-z*]+)\/([a-z0-9*\-.+]+)(?:;([a-z0-9=;]+))?$/)
-      m ? [m[1], m[2], m[3] || ''] : []
+      m = media_type.to_s.match(/^\s*([a-zA-Z*]+)\s*\/\s*([a-zA-Z0-9*\-.+]+)\s*(?:;(.+))?$/)
+      m ? [m[1].downcase, m[2].downcase, m[3] || ''] : []
     end
     module_function :parse_media_type
 
     # Parses a string of media type range parameters into a hash of parameters
     # to their respective values.
     def parse_range_params(params)
-      params.split(';').inject({}) do |m, p|
+      params.split(';').inject({'q' => '1'}) do |m, p|
         k, v = p.split('=', 2)
-        m[k] = v if v
+        m[k.strip] = v.strip if v
         m
       end
     end

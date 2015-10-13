@@ -16,14 +16,22 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal(1, m.qvalue('text/html'))
   end
 
+  def test_invalid_media_type
+    assert_raise Rack::Accept::Header::InvalidHeader do
+      m = M.new('')
+      m = M.new('text')
+      m = M.new('text;q=1')
+    end
+  end
+
   def test_matches
     m = M.new('text/*, text/html, text/html;level=1, */*')
     assert_equal(%w{*/*}, m.matches(''))
     assert_equal(%w{*/*}, m.matches('image/jpeg'))
     assert_equal(%w{text/* */*}, m.matches('text/plain'))
     assert_equal(%w{text/html text/* */*}, m.matches('text/html'))
-    assert_equal(%w{text/html;level=1 text/html text/* */*}, m.matches('text/html;level=1'))
-    assert_equal(%w{text/html;level=1 text/html text/* */*}, m.matches('text/html;level=1;answer=42'))
+    assert_equal(%w{text/html text/* */*}, m.matches('text/html;level=1'))
+    assert_equal(%w{text/html text/* */*}, m.matches('text/html;level=1;answer=42'))
   end
 
   def test_best_of
@@ -42,11 +50,21 @@ class MediaTypeTest < Test::Unit::TestCase
     assert_equal('text/xml', m.best_of(%w< text/xml text/html >))
   end
 
-  def test_extension
+  def test_extensions
+    m = M.new('text/plain')
+    assert_equal({'text/plain' => {'q' => '1'}}, m.extensions)
     m = M.new('text/*;q=0.5;a=42')
-    assert_equal(0.5, m.qvalue('text/plain'))
+    assert_equal({'text/*' => {'q' => '0.5', 'a' => '42'}}, m.extensions)
   end
-  
+
+  def test_params
+    m = M.new('text/plain;q=0.7;version=1.0')
+    assert_equal({'q' => '0.7', 'version' => '1.0'}, m.params('text/plain'))
+    m = M.new('text/*;q=0.5;a=42, application/json;b=12')
+    assert_equal({'q' => '0.5', 'a' => '42'}, m.params('text/plain'))
+    assert_equal({'q' => '1', 'b' => '12'}, m.params('application/json'))
+  end
+
   def test_vendored_types
     m = M.new("application/vnd.ms-excel")
     assert_equal(nil, m.best_of(%w< application/vnd.ms-powerpoint >))

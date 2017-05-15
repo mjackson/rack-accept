@@ -98,6 +98,12 @@ module Rack::Accept
         qvalue(value) != 0
       end
 
+      # Determines if the given header had a +value+ set, if not the header can
+      # be regarded as not having been present in the HTTP connection.
+      def present?
+        !values.empty?
+      end
+
       # Returns a copy of the given +values+ array, sorted by quality factor
       # (qvalue). Each element of the returned array is itself an array
       # containing two objects: 1) the value's qvalue and 2) the original

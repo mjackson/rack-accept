@@ -13,6 +13,13 @@ class LanguageTest < Test::Unit::TestCase
     assert_equal(0, l.qvalue('da'))
   end
 
+  def test_present?
+    header = 'da, en-gb;q=0.8, en;q=0.7'
+    assert_true(L.new(header).present?)
+    header = ''
+    assert_false(L.new(header).present?)
+  end
+
   def test_matches
     l = L.new('da, *, en')
     assert_equal(%w{*}, l.matches(''))

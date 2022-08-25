@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   s.author = 'Michael Jackson'
   s.email = 'mjijackson@gmail.com'
+  s.license = 'MIT'
 
   s.require_paths = %w< lib >
 
